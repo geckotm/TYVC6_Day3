@@ -65,6 +65,8 @@ BEGIN_MESSAGE_MAP(CMouseDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_WM_MOUSEMOVE()
+	ON_WM_LBUTTONDOWN()
+	ON_WM_KEYDOWN()
 END_MESSAGE_MAP()
 
 
@@ -179,4 +181,66 @@ void CMouseDlg::OnMouseMove(UINT nFlags, CPoint point)
 	// My code - end
 
 	CDialogEx::OnMouseMove(nFlags, point);
+}
+
+
+void CMouseDlg::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// My code - begin
+
+	PrevX = point.x;
+	PrevY = point.y;
+
+	// My code - end
+
+	CDialogEx::OnLButtonDown(nFlags, point);
+}
+
+
+void CMouseDlg::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// My code - begin
+
+	char Char;
+	HCURSOR hCursor;
+
+	Char = char(nChar);
+
+	// Is the char 'A'
+	if (Char == 'A')
+	{
+		// Load the arrow cursor
+		hCursor = AfxGetApp()->LoadStandardCursor(IDC_ARROW);
+		SetCursor(hCursor);
+	}
+
+	// Is the char 'B'
+	if (Char == 'B')
+	{
+		// Load the beam cursor
+		hCursor = AfxGetApp()->LoadStandardCursor(IDC_IBEAM);
+		SetCursor(hCursor);
+	}
+
+	// Is the char 'C'
+	if (Char == 'C')
+	{
+		// Load the beam cursor
+		hCursor = AfxGetApp()->LoadStandardCursor(IDC_WAIT);
+		SetCursor(hCursor);
+	}
+
+	// Is the char 'X'
+	if (Char == 'X')
+	{
+		// Load the arrow cursor
+		hCursor = AfxGetApp()->LoadStandardCursor(IDC_ARROW);
+		SetCursor(hCursor);
+		//Exit App
+		OnOK();
+	}
+
+	// My code - end
+
+	CDialogEx::OnKeyDown(nChar, nRepCnt, nFlags);
 }
